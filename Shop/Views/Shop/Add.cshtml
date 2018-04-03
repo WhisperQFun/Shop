@@ -1,7 +1,76 @@
-﻿
+﻿@model Shop.Models.AddItemModel
+
+
 @{
-    ViewData["Title"] = "Add";
+    ViewBag.Title = "Добавить товар";
 }
 
-<h2>Add</h2>
+<h2>Добавление товара</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Название</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Описание</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.description, 5, 50, null)
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Тип товара</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.type_item, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.type_item, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Важно</label>
+        <div class="col-md-10">
+            @Html.ValidationMessageFor(model => model.is_avalible, "", new { @class = "text-danger" })
+            @Html.CheckBox("is_avalible", true)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Стоимость</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Изображение</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Регистрация" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+
 

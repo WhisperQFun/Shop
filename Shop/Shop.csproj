@@ -20,4 +20,7 @@
     <Folder Include="img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Account\Resume.cshtml" />
+  </ItemGroup>
 </Project>

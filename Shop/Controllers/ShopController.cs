@@ -19,7 +19,7 @@ namespace Shop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var items = _context.Items.ToList();
+			var items = _context.Items.ToList();
             return View(items);
         }
 
