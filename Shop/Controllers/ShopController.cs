@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shop.Context;
 using Shop.Data;
 using Shop.Models;
@@ -39,6 +40,19 @@ namespace Shop.Controllers
                 return RedirectToAction("Index", "Home");
                 
             }
+            return View(model);
+        }
+
+        public async Task<IActionResult> item(int id)
+        {
+            Item item = await _context.Items.FirstOrDefaultAsync(u => u.itemId == id);
+            ItemModel model = new ItemModel();
+            model.item_id = item.itemId;
+            model.name = item.name;
+            model.description = item.description;
+            model.is_avalible = item.is_avalible;
+            model.cost = item.cost;
+            model.type_item = item.type_item;
             return View(model);
         }
     }

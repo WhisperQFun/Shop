@@ -9,6 +9,8 @@ namespace Shop.Models
     public class ItemModel
     {
         [Required]
+        public int item_id { get; set; }
+        [Required]
         public string name { get; set; }
         [Required]
         public string description { get; set; }
