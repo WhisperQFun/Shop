@@ -80,7 +80,12 @@ namespace Shop.Controllers
             Item item = await _context.Items.FirstOrDefaultAsync(u => u.itemId == id);
             cart_order.items.Add(item);
             cart_json = JsonConvert.SerializeObject(cart_order);
+            float sum = 0;
             Response.Cookies.Append("cart", cart_json);
+            foreach (Item value in cart_order.items)
+            {
+                 sum = value.cost + sum;
+            }
             return RedirectToAction("Index", "Shop");
         }
     }
