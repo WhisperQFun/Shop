@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Shop.Context;
 using Shop.Data;
 using Shop.Models;
+
 
 namespace Shop.Controllers
 {
@@ -54,6 +58,30 @@ namespace Shop.Controllers
             model.cost = item.cost;
             model.type_item = item.type_item;
             return View(model);
+        }
+
+        public async Task<IActionResult> Additem(int id)
+        {
+            
+            Cart cart_order;
+            string cart_json = "";
+            if (Request.Cookies.ContainsKey("cart"))
+            {
+                cart_json = Request.Cookies["cart"];
+                cart_order = JsonConvert.DeserializeObject<Cart>(cart_json);
+                Response.Cookies.Delete("cart");
+            }
+            else
+            {
+                cart_order = new Cart();
+                cart_order.items = new List<Item>();
+            }
+               
+            Item item = await _context.Items.FirstOrDefaultAsync(u => u.itemId == id);
+            cart_order.items.Add(item);
+            cart_json = JsonConvert.SerializeObject(cart_order);
+            Response.Cookies.Append("cart", cart_json);
+            return RedirectToAction("Index", "Shop");
         }
     }
 }
