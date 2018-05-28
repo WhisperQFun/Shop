@@ -18,9 +18,13 @@
 
   <ItemGroup>
     <Folder Include="Views\img\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\Account\Resume.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Cart\Index.html" />
   </ItemGroup>
 </Project>

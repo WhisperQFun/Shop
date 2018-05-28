@@ -1,0 +1,34 @@
+﻿@model Shop.Models.CartModel
+
+@{
+    ViewBag.Title = "Товары";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="contenier ml-3 mt-4">
+        <div class="contenier">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model.cart.items)
+                    {
+                        <div class="card col-lg-6 col-xl-2" style="width: 18rem;">
+                            <img class="card-img-top" src="~/img/Shop.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.name</h5>
+                                <p class="card-text">@item.description</p>
+                                <p>@item.cost</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div>
+            <hr>
+            <p>Total cost: @Model.total_cost</p>
+        </div>
+    </div>
+}
