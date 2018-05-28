@@ -16,7 +16,7 @@
     <p>@Model.description</p>
     <p>@Model.is_avalible</p>
     <p>@Model.cost</p>
-    <a href="@Url.Action("item", "Shop",new {id =  @Model.item_id })" class="btn btn-outline-secondary">Добавить в корзину</a>
+    <a href="@Url.Action("Additem", "Shop",new {id =  @Model.item_id })" class="btn btn-outline-secondary">Добавить в корзину</a>
 </div> 
     
 }

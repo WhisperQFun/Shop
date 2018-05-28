@@ -1,0 +1,22 @@
+﻿@model Shop.Models.ItemModel
+
+
+@{
+    ViewBag.Title = "Товар";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.name</h2>
+        <hr />
+        <p>@Model.description</p>
+        <p>@Model.is_avalible</p>
+        <p>@Model.cost</p>
+        <a href="@Url.Action("item", "Shop",new {id =  @Model.item_id })" class="btn btn-outline-secondary">Добавить в корзину</a>
+    </div>
+
+}

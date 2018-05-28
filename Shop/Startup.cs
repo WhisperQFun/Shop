@@ -59,6 +59,9 @@ namespace Shop
                 routes.MapRoute(
                     name: "item",
                     template: "{controller=Shop}/{action=item}/{id?}");
+                routes.MapRoute(
+                    name: "item_add",
+                    template: "{controller=Shop}/{action=Additem}/{id?}");
             });
         }
     }
