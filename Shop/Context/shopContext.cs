@@ -23,7 +23,5 @@ namespace Shop.Context
         public DbSet<User> User { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Order> Orders { get; set; }
-
-
     }
 }

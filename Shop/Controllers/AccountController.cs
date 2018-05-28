@@ -75,9 +75,9 @@ namespace Shop.Controllers
                 if (ModelState.IsValid)
                 {
                     var password = await SHA.GenerateSHA256String(model.password + model.email);
-                    User user = await _context.User
-                        .Include(u => u.Role)
-                        .FirstOrDefaultAsync(u => u.Login == model.email && u.Password == password );
+				User user = await _context.User
+					.Include(u => u.Role)
+					.FirstOrDefaultAsync(u => u.Login == model.email && u.Password == password );
                     if (user != null)
                     {
                         await Authenticate(user);
