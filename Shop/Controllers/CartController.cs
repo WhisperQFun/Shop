@@ -31,5 +31,33 @@ namespace Shop.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Process_order()
+        {
+            Order order = null;
+            Cart cart_order = null;
+            string cart_json = "";
+            float sum = 0;
+          
+            if (Request.Cookies.ContainsKey("cart"))
+            {
+                cart_json = Request.Cookies["cart"];
+                cart_order = JsonConvert.DeserializeObject<Cart>(cart_json);
+            }
+            foreach (Item value in cart_order.items)
+            {
+                sum = value.cost + sum;
+            }
+            order.items = cart_order.items;
+            order.timestamp = DateTime.Now.ToUniversalTime().ToString();
+           // order.description = 
+            return View();
+        }
+
+        public async Task<IActionResult> Order()
+        {
+            
+            return View();
+        }
     }
 }

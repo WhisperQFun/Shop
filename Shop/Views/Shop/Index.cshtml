@@ -20,7 +20,7 @@
                                 <h5 class="card-title">@item.name</h5>
                                 <p class="card-text">@item.description</p>
                                 <p>@item.cost</p>
-                                <a href="@item.itemId" class="btn btn-primary">Купить</a>
+                                <a href="@Url.Action("item", "Shop",new {id =   @item.itemId })" class="btn btn-primary">Подробнее</a>
                             </div>
                         </div>
                     }

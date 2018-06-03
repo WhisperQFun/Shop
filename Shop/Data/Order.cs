@@ -8,7 +8,7 @@ namespace Shop.Data
     public class Order
     {
         public int orderId { get; set; }
-        public string items { get; set; }
+        public List<Item> items { get; set; }
         public string timestamp { get; set; }
         public string description { get; set; }
         public string user_id { get; set; }

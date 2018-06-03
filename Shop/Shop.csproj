@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Views\img\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
 
   <ItemGroup>
