@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Shop.Context;
 using Shop.Data;
 using Shop.Models;
 
@@ -11,6 +13,13 @@ namespace Shop.Controllers
 {
     public class CartController : Controller
     {
+
+        private shopContext _context;
+
+        public CartController(shopContext context)
+        {
+            _context = context;
+        }
         public async Task<IActionResult> Index()
         {
             Cart cart_order = null;
@@ -32,13 +41,22 @@ namespace Shop.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Process_order()
+        public async Task<IActionResult> Order()
         {
+            
+            return View();
+        }
+
+        //[Authorize(Roles = "admin, user")]
+        [Authorize]
+        public async Task<IActionResult> Order(OrderModel model)
+        {
+            User user = _context.User.FirstOrDefault(u => u.Login == User.Identity.Name);
             Order order = null;
             Cart cart_order = null;
             string cart_json = "";
             float sum = 0;
-          
+
             if (Request.Cookies.ContainsKey("cart"))
             {
                 cart_json = Request.Cookies["cart"];
@@ -50,13 +68,12 @@ namespace Shop.Controllers
             }
             order.items = cart_order.items;
             order.timestamp = DateTime.Now.ToUniversalTime().ToString();
-           // order.description = 
-            return View();
-        }
+            order.description = model.description;
+            order.cost = sum;
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
 
-        public async Task<IActionResult> Order()
-        {
-            
+            Order = _context.Orders.FirstOrDefault(u => u.user_id == user.UserId);
             return View();
         }
     }
