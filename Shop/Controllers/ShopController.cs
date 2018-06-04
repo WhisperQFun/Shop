@@ -29,7 +29,7 @@ namespace Shop.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add()
         {
             

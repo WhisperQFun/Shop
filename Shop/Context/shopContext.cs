@@ -24,6 +24,6 @@ namespace Shop.Context
         public DbSet<User> User { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Shop.Models.OrderModel> OrderModel { get; set; }
+        public DbSet<API> Api { get; set; }
     }
 }

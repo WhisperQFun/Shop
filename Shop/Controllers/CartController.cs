@@ -73,7 +73,7 @@ namespace Shop.Controllers
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
-            Order = _context.Orders.FirstOrDefault(u => u.user_id == user.UserId);
+            order = _context.Orders.FirstOrDefault(u => u.user_id == user.UserId);
             return View();
         }
     }
