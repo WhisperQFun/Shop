@@ -41,6 +41,8 @@ namespace Shop.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Order()
         {
             
@@ -66,15 +68,16 @@ namespace Shop.Controllers
             {
                 sum = value.cost + sum;
             }
-            order.items = cart_order.items;
+            order = new Order();
+            order.items = cart_json;
             order.timestamp = DateTime.Now.ToUniversalTime().ToString();
             order.description = model.description;
             order.cost = sum;
-            await _context.Orders.AddAsync(order);
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
             order = _context.Orders.FirstOrDefault(u => u.user_id == user.UserId);
-            return View();
+            return RedirectToAction("Shop", "Index");
         }
     }
 }
